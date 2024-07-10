@@ -3,6 +3,7 @@
 `--record` - record the cause of change used in rollout
 `--dry-run=client` - tells if resource can be created and if command  is right
 `-o [yaml,json]` - output resource definition in yaml formal on the screen
+--no-headers - display outo=put without headers
 
 ## Apply
 
@@ -10,6 +11,7 @@
 
 ## Get
 
+`kubectl get all` - get all resources
 `kubectl get deployments` - get deployments from default namespace
 `kubectl get nodes` - get nodes from edfault namespace 
 `kubectl get ns` - get namespaces 
@@ -21,6 +23,9 @@
 `kubectl get secrets` - get secrets   
 `kubectl get serviceaccount` - get service account
 `kubectl get rs new-replica-set -o yaml` - dump manifest of existing resource `new-replica-set`
+`kubectl get pods --selector app=App1` - select pods with label app=App1
+`kubectl get pod -l env=prod,bu=finance,tier=frontend` - select pods that belongs to this all labels
+`kubectl get pod -l env=prod -l bu=finance -l tier=frontend` - select each pod that have one of
 
 ## Version
 
@@ -47,7 +52,10 @@
 `kubectl create deployment redis-deploy --image=redis --replicas=2 -n dev-ns` = Create a new deployment called redis-deploy in the dev-ns namespace with the redis image. It should have 2 replicas.
 `kubectl run httpd --image=httpd:alpine --port=80 --expose` - Create a pod called httpd using the image httpd:alpine in the default namespace. Next, create a service of type ClusterIP by the same name (httpd). The target port for the service should be 80.
 
+## Exec 
 
+`kubectl exec hello-pod -- ps` - executes ps on the first contaienr of pod hello-pd
+`kubectl exec hello-pod --container CONTAINER_NAME -- ps` - executes ps on the CONTAINER_NAME contaienr of pod hello-pd
 
 ## Explain
 
@@ -61,8 +69,9 @@
 
 ## Logs
 
-`kubectl logs logtest [NAME]` 
-`kubectl logs logtest --container [CONTAINER-NAME]`
+`kubectl logs POD` - logs from pod, it will print a logs from first container
+`kubectl logs POD --container [CONTAINER-NAME]` - logs from pod, it will print logs from target CONTAINER_NAME
+`kubectl logs POD [CONTAINER-NAME]` - same as above 
 
 ## Describe
 
@@ -91,3 +100,21 @@
 
 `kubectl run nginx --image nginx`
 `kubectl run nginx --image=nginx --dry-run=client -o yaml` - generate pod manifest yaml file done create resource
+
+## Replace
+
+`kubectl replace -f NAME.yaml --force` - recreate the entity by forece
+
+## Taints
+
+`kubectl taint nodes node1 app=blue:NoSchedule` - set taint app=blue on node1
+
+## Top
+
+`kubectl top node` - see metric of nodes in the cluster
+`kubectl top pod` - see metrics of pods in the node
+
+## Labels 
+
+`kubectl label nodes NODE_NAME LABEL_KEY=LABEL_VALUE`
+
