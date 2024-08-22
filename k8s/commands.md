@@ -1,9 +1,24 @@
-## Usefull flags 
+---
+id: commands
+aliases: []
+tags: []
+---
 
+
+## Usefull flags 
+ 
 `--record` - record the cause of change used in rollout
 `--dry-run=client` - tells if resource can be created and if command  is right
 `-o [yaml,json]` - output resource definition in yaml formal on the screen
 --no-headers - display outo=put without headers
+
+## Other 
+
+`kubectl api-resources` - display all shortcuts of objects and its kind type.
+
+## api-version
+
+`kubectl api-version` - command that shows which api version is supported by cluster.
 
 ## Apply
 
@@ -90,6 +105,10 @@
 
 `kubectl scale deployment nginx --replicas=4` - scale deployment to 4 replicas
 
+## Proxy
+
+`kubectl proxy` - will create localhost proxy to cluster. It allows to use other tolls like curl, to form requests to cluster.
+
 ## Rollout 
 
 `kubectl rollout status deployment [DEPLOYMENT-NAME]` - status
@@ -118,3 +137,11 @@
 
 `kubectl label nodes NODE_NAME LABEL_KEY=LABEL_VALUE`
 
+## Other 
+
+```bash
+for kind in `kubectl api-resources | tail +2 | awk '{ print $1 }'`; \
+do kubectl explain $kind; done | grep -e "KIND:" -e "VERSION:"
+```
+
+Nice command to print and version of api-resource.
