@@ -1,0 +1,11 @@
+| Metoda / funkcja  | Krótki opis działania                                                                                       | Odpowiednik w SQL                                                             |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `Session.query()` | Tworzy obiekt zapytania (`Query`) dla danego modelu ORM. To punkt startowy dla budowy zapytania.            | `SELECT * FROM <tabela>`                                                      |
+| `Query.filter()`  | Dodaje warunki filtrowania rekordów; można łańcuchować wiele `.filter()`.                                   | `WHERE <warunek>`                                                             |
+| `Query.offset()`  | Pomija określoną liczbę rekordów od początku zestawu wyników (do paginacji).                                | `OFFSET <n>`                                                                  |
+| `Query.limit()`   | Ogranicza liczbę zwróconych rekordów.                                                                       | `LIMIT <n>`                                                                   |
+| `Query.all()`     | Wykonuje zapytanie i zwraca wszystkie pasujące rekordy jako listę.                                          | Zakończenie zapytania `SELECT`, zwraca wszystkie wiersze                      |
+| `Query.first()`   | Zwraca tylko pierwszy wynik zapytania lub `None`, jeśli brak dopasowań.                                     | `SELECT ... LIMIT 1`                                                          |
+| `Query.count()`   | Zwraca liczbę rekordów spełniających warunki zapytania.                                                     | `SELECT COUNT(*) FROM <tabela> WHERE <warunki>`                               |
+| `Query.options()` | Ustawia dodatkowe opcje zapytania, np. strategię ładowania powiązanych obiektów.                            | brak bezpośredniego odpowiednika — modyfikuje generowany SQL (np. przez JOIN) |
+| `joinedload()`    | Strategia „eager loading” — dołącza powiązaną tabelę w tym samym zapytaniu, by uniknąć dodatkowych zapytań. | `JOIN <powiązana_tabela>`                                                     |
